@@ -1,3 +1,4 @@
+import { readFile, writeFile } from "../helpers/fileDB";
 import parseBody from "../helpers/parseBody";
 import addRoute from "../helpers/RouteHendler";
 import sendJson from "../helpers/sendJson";
@@ -27,5 +28,15 @@ sendJson(res, 200, {
 
 addRoute("POST", "/api/users", async (req, res) => {
     const body = await parseBody(req);
+
+    const users= readFile();
+    const newUsers={
+        ...body 
+    };
+
+    users.push(newUsers);
+
+    writeFile(users);
+    
     sendJson(res, 200,body)
 })
